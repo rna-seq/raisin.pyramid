@@ -4,7 +4,7 @@ from pyramid.security import remember
 from pyramid.security import forget
 from pyramid.url import route_url
 
-from rnaseqpyramid.security import USERS
+from raisinpyramid.security import USERS
 
 def login(request):
     login_url = route_url('login', request)

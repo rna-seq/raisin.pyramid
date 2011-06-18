@@ -8,10 +8,10 @@ from pyramid.static import static_view
 
 import pyramid.renderers
 
-from rnaseq.restyler.page import Page
-from rnaseq.restyler.box import Box
+from raisin.restyler.page import Page
+from raisin.restyler.box import Box
 
-from rnaseqpyramid import security
+from raisinpyramid import security
 
 STATIC_VIEW_OF_ICO = static_view('raisin.page:templates/static/', cache_max_age=3600)
 

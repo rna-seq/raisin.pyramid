@@ -8,9 +8,9 @@ CHANGES = open(os.path.join(here, 'CHANGES.txt')).read()
 
 requires = ['pyramid', 'WebError']
 
-setup(name='rnaseq.pyramid',
+setup(name='raisin.pyramid',
       version='1.0',
-      description='rnaseq.pyramid',
+      description='raisin.pyramid',
       long_description=README + '\n\n' +  CHANGES,
       classifiers=[
         "Programming Language :: Python",
@@ -27,10 +27,10 @@ setup(name='rnaseq.pyramid',
       zip_safe=False,
       install_requires=requires,
       tests_require=requires,
-      test_suite="rnaseqpyramid",
+      test_suite="raisinpyramid",
       entry_points = """\
       [paste.app_factory]
-      main = rnaseqpyramid:main
+      main = raisinpyramid:main
       """,
       paster_plugins=['pyramid'],
       )

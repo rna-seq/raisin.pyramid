@@ -5,11 +5,11 @@ from pyramid.authentication import AuthTktAuthenticationPolicy
 from pyramid.authorization import ACLAuthorizationPolicy
 from pyramid.exceptions import Forbidden
 from raisin.page import PAGES
-from rnaseqpyramid.resources import Root
-from rnaseqpyramid import login
-from rnaseqpyramid import security
-from rnaseqpyramid.views import box_view
-from rnaseqpyramid.views import page_view
+from raisinpyramid.resources import Root
+from raisinpyramid import login
+from raisinpyramid import security
+from raisinpyramid.views import box_view
+from raisinpyramid.views import page_view
 from security import USERS
 from security import PROJECTS
 
@@ -58,7 +58,7 @@ def main(global_config, **settings):
     config.add_route(name="login", 
                      path="login",
                      view = login.login,
-                     view_renderer = "rnaseqpyramid:templates/login.pt")
+                     view_renderer = "raisinpyramid:templates/login.pt")
     config.add_route(name="logout", 
                      path="logout",
                      view = login.logout)
