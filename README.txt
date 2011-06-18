@@ -1,4 +1,4 @@
-= rnaseq.pyramid =
+= raisin.pyramid =
 
 This is a Pyramid server that serves the public pages of the RNASeq homepage.
 
@@ -9,9 +9,9 @@ For more information about Pyramid, check out the official website:
 = Starting the server =
 
 For information on starting and stopping the server, have a look at the README.txt
-in rnaseq.buildout:
+in raisin.buildout:
 
-svn://mroder@svn.crg.es/big/rnaseq/rnaseq.buildout/trunk
+svn://mroder@svn.crg.es/big/raisin/raisin.buildout/trunk
 
 = About the server =
 
@@ -23,10 +23,10 @@ The configuration of the pages and boxes is imported from raisin.box and raisin.
     from raisin.page import PAGES
     from raisin.box import BOXES
 
-The models are imported from rnaseq.restyler:
+The models are imported from raisin.restyler:
 
-    from rnaseq.restyler.page import Page
-    from rnaseq.restyler.box import Box
+    from raisin.restyler.page import Page
+    from raisin.restyler.box import Box
 
 See the respective packages to learn about how to customize the pages and boxes.
 

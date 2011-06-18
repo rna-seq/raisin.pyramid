@@ -2,8 +2,6 @@
 /CHANGES.txt -text
 /MANIFEST.in -text
 /README.txt -text
-/development.ini -text
-/production.ini -text
 raisinpyramid/__init__.py -text
 raisinpyramid/login.py -text
 raisinpyramid/resources.py -text
