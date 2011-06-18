@@ -1,0 +1,24 @@
+* text=auto !eol
+/CHANGES.txt -text
+/MANIFEST.in -text
+/README.txt -text
+/development.ini -text
+/production.ini -text
+rnaseqpyramid/__init__.py -text
+rnaseqpyramid/login.py -text
+rnaseqpyramid/resources.py -text
+rnaseqpyramid/security.py -text
+rnaseqpyramid/static/favicon.ico -text
+rnaseqpyramid/static/footerbg.png -text
+rnaseqpyramid/static/headerbg.png -text
+rnaseqpyramid/static/ie6.css -text
+rnaseqpyramid/static/middlebg.png -text
+rnaseqpyramid/static/pylons.css -text
+rnaseqpyramid/static/pyramid-small.png -text
+rnaseqpyramid/static/pyramid.png -text
+rnaseqpyramid/static/transparent.gif -text
+rnaseqpyramid/templates/login.pt -text
+rnaseqpyramid/views.py -text
+/setup.cfg -text
+/setup.py -text
+/version.txt -text
