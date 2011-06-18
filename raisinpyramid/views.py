@@ -8,8 +8,8 @@ from pyramid.static import static_view
 
 import pyramid.renderers
 
-from raisin.restyler.page import Page
-from raisin.restyler.box import Box
+from rnaseq.restyler.page import Page
+from rnaseq.restyler.box import Box
 
 from raisinpyramid import security
 
