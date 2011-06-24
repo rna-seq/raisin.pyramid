@@ -14,17 +14,17 @@ from security import USERS
 from security import PROJECTS
 
 def register_page_and_boxes(config, page_key, page_value):
-    config.add_route(name='page_' + page_key,
+    config.add_route(name='p1_' + page_key,
                      path=page_value['path'],
                      view=page_view,
                      renderer=page_value['renderer'])
     # Remove the trailing slash, so that pages are also rendered when they don't have it.
-    config.add_route(name='samepage' + page_key,
+    config.add_route(name='p2_' + page_key,
                      path=page_value['path'][:-1],
                      view=page_view,
                      renderer=page_value['renderer'])
     # Register page boxes
-    config.add_route(name='page_' + page_key + '_box',
+    config.add_route(name='p3_' + page_key + '_box',
                      path=page_value['path'] + ':box_id_with_extension',
                      view=box_view,
                      renderer=page_value['renderer'])
