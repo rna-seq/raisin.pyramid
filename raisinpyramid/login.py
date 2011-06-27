@@ -34,6 +34,6 @@ def login(request):
     
 def logout(request):
     headers = forget(request)
-    return HTTPFound(location = route_url('page_homepage', request),
+    return HTTPFound(location = route_url('p1_homepage', request),
                      headers = headers)
     
