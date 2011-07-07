@@ -24,7 +24,6 @@ def check_permission(request, logged_in):
         if request.url.startswith("http://localhost:7777/"):
             # No access restrictions when accessing through localhost
             print request.url
-            pass
         elif logged_in == 'admin':
             # Allow access to all projects to the admin user
             pass
