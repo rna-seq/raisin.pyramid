@@ -18,7 +18,7 @@ STATIC_VIEW_OF_ICO = static_view('raisin.page:templates/static/', cache_max_age=
 def box_view(request):
     logged_in = authenticated_userid(request)
     security.check_permission(request, logged_in)   
-    context=Box(request)
+    context = Box(request)
     context.__acl__ = [ (Allow, Everyone, 'view homepage'),
                         (Allow, 'group:encode', 'view encode project'),
                         (Allow, 'group:big', 'view any project'),
