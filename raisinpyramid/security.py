@@ -2,19 +2,21 @@ from pyramid.exceptions import Forbidden
 
 USERS = {}
 PROJECTS = {}
-          
+
+
 # The groupfinder is currently not used to protect any view, because the security is
 # enforced solely in the check_permission method
 def groupfinder(userid, request):
     if userid in USERS:
         return []
 
+
 def check_permission(request, logged_in):
-    project_name = request.matchdict.get('project_name', None)    
+    project_name = request.matchdict.get('project_name', None)
     anonymous_projects = PROJECTS.get("anonymous", [])
     if request.matchdict == {}:
         # homepage
-        pass 
+        pass
     elif project_name in anonymous_projects:
         # Anonymous can access
         pass
