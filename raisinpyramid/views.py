@@ -19,9 +19,9 @@ def box_view(request):
     logged_in = authenticated_userid(request)
     security.check_permission(request, logged_in)   
     context = Box(request)
-    context.__acl__ = [ (Allow, Everyone, 'view homepage'),
-                        (Allow, 'group:encode', 'view encode project'),
-                        (Allow, 'group:big', 'view any project'),
+    context.__acl__ = [(Allow, Everyone, 'view homepage'),
+                       (Allow, 'group:encode', 'view encode project'),
+                       (Allow, 'group:big', 'view any project'),
                       ]
 
     if request['PATH_INFO'].endswith('.ico'):
@@ -32,11 +32,11 @@ def box_view(request):
             return HTTPNotFound()
         else:
             response = Response()
-            response.body = context.body            
+            response.body = context.body
     else:
         box_renderer = pyramid.renderers.get_renderer('raisin.page:templates/box.pt')
         response = Response()
-        response.unicode_body = box_renderer({'context':context, 'request':request}, request)
+        response.unicode_body = box_renderer({'context': context, 'request': request}, request)
     return response
 
 def page_view(request):
