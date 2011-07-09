@@ -1,3 +1,15 @@
+"""Implement a Pyramid application
+
+Contains the main method that registers 
+
+    * users in the USERS regstry
+    
+    * projects in the PROJECTS registry
+    
+Sets up a Pyramid configuration and adds the necessary routes.
+
+"""
+
 from configobj import ConfigObj
 
 from pyramid.config import Configurator
