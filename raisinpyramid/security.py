@@ -13,9 +13,11 @@ def check_permission(request, logged_in):
     project_name = request.matchdict.get('project_name', None)    
     anonymous_projects = PROJECTS.get("anonymous", [])
     if request.matchdict == {}:
-        pass # homepage
+        # homepage
+        pass 
     elif project_name in anonymous_projects:
-        pass # Anonymous can access
+        # Anonymous can access
+        pass
     elif logged_in == None and not request.url.startswith("http://localhost:7777/"):
         # Show the login page if the user is not logged in
         # For test purposes, no login is needed when accessing through localhost
