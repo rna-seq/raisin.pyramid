@@ -45,5 +45,5 @@ def page_view(request):
     context = Page(request)
     return dict(
         context=context,
-        logged_in = logged_in,
+        logged_in=logged_in,
         )
