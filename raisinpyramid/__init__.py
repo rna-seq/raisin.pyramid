@@ -1,11 +1,11 @@
 """Implement a Pyramid application
 
-Contains the main method that registers 
+Contains the main method that registers
 
     * users in the USERS regstry
-    
+
     * projects in the PROJECTS registry
-    
+
 Sets up a Pyramid configuration and adds the necessary routes.
 
 """
@@ -25,6 +25,7 @@ from raisinpyramid.views import page_view
 from security import USERS
 from security import PROJECTS
 
+
 def register_page_and_boxes(config, page_key, page_value):
     config.add_route(name='p1_' + page_key,
                      path=page_value['path'],
@@ -41,6 +42,7 @@ def register_page_and_boxes(config, page_key, page_value):
                      view=box_view,
                      renderer=page_value['renderer'])
 
+
 def main(global_config, **settings):
     """ This function returns a Pyramid WSGI application.
 
@@ -49,42 +51,40 @@ def main(global_config, **settings):
 
     for key, value in ConfigObj(settings['users']).items():
         USERS[key] = value['password']
-    
+
     for project, users in ConfigObj(settings['projects']).items():
         for user in users['users']:
-            if PROJECTS.has_key(user):
+            if user in PROJECTS:
                 PROJECTS[user].append(project)
             else:
                 PROJECTS[user] = [project]
 
-    authentication_policy = AuthTktAuthenticationPolicy(secret = 'seekrit',
-                                                        callback = security.groupfinder)
+    authentication_policy = AuthTktAuthenticationPolicy(secret='seekrit',
+                                                        callback=security.groupfinder)
     authorization_policy = ACLAuthorizationPolicy()
 
-    config = Configurator(authentication_policy = authentication_policy,
-                          authorization_policy = authorization_policy,
-                          settings = settings, 
-                          root_factory = Root)
+    config = Configurator(authentication_policy=authentication_policy,
+                          authorization_policy=authorization_policy,
+                          settings=settings,
+                          root_factory=Root)
     config.begin()
     config.scan()
-    config.add_route(name="login", 
+    config.add_route(name="login",
                      path="login",
-                     view = login.login,
-                     view_renderer = "raisinpyramid:templates/login.pt")
-    config.add_route(name="logout", 
+                     view=login.login,
+                     view_renderer="raisinpyramid:templates/login.pt")
+    config.add_route(name="logout",
                      path="logout",
-                     view = login.logout)
+                     view=login.logout)
     # Register pages
     for page_key, page_value in PAGES.items():
         register_page_and_boxes(config, page_key, page_value)
 
     # Register folder containing static material
-    config.add_static_view(name="static", path="raisin.page:templates/static")  
+    config.add_static_view(name="static", path="raisin.page:templates/static")
 
-    config.add_view(view = login.login, renderer="templates/login.pt", for_ = Forbidden)
+    config.add_view(view=login.login, renderer="templates/login.pt", for_=Forbidden)
 
     config.end()
 
     return config.make_wsgi_app()
-
-
