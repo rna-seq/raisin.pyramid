@@ -4,8 +4,8 @@ USERS = {}
 PROJECTS = {}
 
 
-# The groupfinder is currently not used to protect any view, because the security is
-# enforced solely in the check_permission method
+# The groupfinder is currently not used to protect any view, because the 
+# security is enforced solely in the check_permission method
 def groupfinder(userid, request):
     if userid in USERS:
         return []
