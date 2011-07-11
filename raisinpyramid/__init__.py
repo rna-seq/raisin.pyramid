@@ -51,11 +51,11 @@ def main(global_config, **settings):
 
     It is usually called by the PasteDeploy framework during ``paster serve``.
     """
- 
-    # The global configuration contains the folder path of the configuration 
+
+    # The global configuration contains the folder path of the configuration
     # file used to start the server.
     here = global_config['here']
-    
+
     # Choose which users configuration file to use
     if 'users' in settings:
         # If it is defined in the settings, use this one
@@ -66,7 +66,7 @@ def main(global_config, **settings):
 
     if not os.path.exists(users_file):
         raise IOError("File %s not found" % users_file)
-            
+
     # Choose which projects configuration file to use
     if 'projects' in settings:
         # If it is defined in the settings, use this one
@@ -110,11 +110,11 @@ def main(global_config, **settings):
         register_page_and_boxes(config, page_key, page_value)
 
     # Register folder containing static material
-    config.add_static_view(name="static", 
+    config.add_static_view(name="static",
                            path="raisin.page:templates/static")
 
-    config.add_view(view=login.login, 
-                    renderer="templates/login.pt", 
+    config.add_view(view=login.login,
+                    renderer="templates/login.pt",
                     for_=Forbidden)
 
     config.end()
