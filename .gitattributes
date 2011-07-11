@@ -4,7 +4,6 @@
 /README.txt -text
 raisinpyramid/__init__.py -text
 raisinpyramid/login.py -text
-raisinpyramid/resources.py -text
 raisinpyramid/security.py -text
 raisinpyramid/static/favicon.ico -text
 raisinpyramid/static/footerbg.png -text
