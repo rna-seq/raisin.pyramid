@@ -88,12 +88,11 @@ def main(global_config, **settings):
             else:
                 PROJECTS[user] = [project]
 
-    authen_policy = AuthTktAuthenticationPolicy(secret='seekrit',
-                                                callback=security.groupfinder)
-    author_policy = ACLAuthorizationPolicy()
+    authentication_policy = AuthTktAuthenticationPolicy(secret='raisinseq')
+    authorization_policy = ACLAuthorizationPolicy()
 
-    config = Configurator(authentication_policy=authen_policy,
-                          authorization_policy=author_policy,
+    config = Configurator(authentication_policy=authentication_policy,
+                          authorization_policy=authorization_policy,
                           settings=settings,
                           root_factory=Root)
     config.begin()
