@@ -12,6 +12,7 @@ from pyramid.exceptions import Forbidden
 USERS = {}
 PROJECTS = {}
 
+
 def check_permission(request, logged_in):
     """Check permissions on request"""
     project_name = request.matchdict.get('project_name', None)
