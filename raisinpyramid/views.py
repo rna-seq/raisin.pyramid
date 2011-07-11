@@ -32,7 +32,7 @@ def box_view(request):
         template = 'raisin.page:templates/box.pt'
         box_renderer = pyramid.renderers.get_renderer(template)
         response = Response()
-        value = {'context': context, 
+        value = {'context': context,
                  'request': request}
         response.unicode_body = box_renderer(value, request)
     elif file_extension == '.csv':
