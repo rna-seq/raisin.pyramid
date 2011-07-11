@@ -93,8 +93,7 @@ def main(global_config, **settings):
 
     config = Configurator(authentication_policy=authentication_policy,
                           authorization_policy=authorization_policy,
-                          settings=settings,
-                          root_factory=Root)
+                          settings=settings)
     config.begin()
     config.scan()
     config.add_route(name="login",
