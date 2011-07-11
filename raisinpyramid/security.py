@@ -1,17 +1,19 @@
+"""Security
+
+USERS - Registry of users
+
+PROJECTS - Registry of projects
+
+check_permissions - Check permissions on request
+"""
+
 from pyramid.exceptions import Forbidden
 
 USERS = {}
 PROJECTS = {}
 
-
-# The groupfinder is currently not used to protect any view, because the
-# security is enforced solely in the check_permission method
-def groupfinder(userid, request):
-    if userid in USERS:
-        return []
-
-
 def check_permission(request, logged_in):
+    """Check permissions on request"""
     project_name = request.matchdict.get('project_name', None)
     anonymous_projects = PROJECTS.get("anonymous", [])
 
