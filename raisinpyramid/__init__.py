@@ -18,7 +18,6 @@ from pyramid.authentication import AuthTktAuthenticationPolicy
 from pyramid.authorization import ACLAuthorizationPolicy
 from pyramid.exceptions import Forbidden
 from raisin.page import PAGES
-from raisinpyramid.resources import Root
 from raisinpyramid import login
 from raisinpyramid import security
 from raisinpyramid.views import box_view
