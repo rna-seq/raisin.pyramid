@@ -1,3 +1,5 @@
+"""Login for Pyramid app"""
+
 from webob.exc import HTTPFound
 
 from pyramid.security import remember
@@ -8,6 +10,7 @@ from raisinpyramid.security import USERS
 
 
 def login(request):
+    """Handle login request"""
     login_url = route_url('login', request)
     referrer = request.url
     if referrer == login_url:
@@ -36,6 +39,7 @@ def login(request):
 
 
 def logout(request):
+    """Handle logout request"""
     headers = forget(request)
     return HTTPFound(location=route_url('p1_homepage', request),
                      headers=headers)
