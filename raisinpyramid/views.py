@@ -1,5 +1,6 @@
 """Views for boxes and pages"""
 
+import re
 import os.path
 from webob import Response
 from webob.exc import HTTPNotFound
@@ -17,9 +18,21 @@ from raisinpyramid import security
 STATIC_VIEW_OF_ICO = static_view('raisin.page:templates/static/',
                                  cache_max_age=3600)
 
+VALID_KEY = re.compile('^[A-Za-z_]*$')
+VALID_VALUE = re.compile('^[A-Za-z0-9-_.]*$')
+
+def validate(matchdict):
+    """Validate the matchdict"""
+    for key, value in matchdict.items():
+        print key, value
+        if not VALID_KEY.match(key):
+            raise AttributeError
+        if not VALID_VALUE.match(value):
+            raise AttributeError
 
 def box_view(request):
     """View for boxes"""
+    validate(request.matchdict)
     logged_in = authenticated_userid(request)
     security.check_permission(request, logged_in)
     context = Box(request)
@@ -49,6 +62,7 @@ def box_view(request):
 
 def page_view(request):
     """View for pages"""
+    validate(request.matchdict)
     logged_in = authenticated_userid(request)
     security.check_permission(request, logged_in)
     context = Page(request)
@@ -57,3 +71,4 @@ def page_view(request):
         context=context,
         logged_in=logged_in,
         )
+
