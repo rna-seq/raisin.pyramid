@@ -21,6 +21,7 @@ STATIC_VIEW_OF_ICO = static_view('raisin.page:templates/static/',
 VALID_KEY = re.compile('^[A-Za-z_]*$')
 VALID_VALUE = re.compile('^[A-Za-z0-9-_.]*$')
 
+
 def validate(matchdict):
     """Validate the matchdict"""
     for key, value in matchdict.items():
@@ -29,6 +30,7 @@ def validate(matchdict):
             raise AttributeError
         if not VALID_VALUE.match(value):
             raise AttributeError
+
 
 def box_view(request):
     """View for boxes"""
@@ -71,4 +73,3 @@ def page_view(request):
         context=context,
         logged_in=logged_in,
         )
-
