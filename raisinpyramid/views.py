@@ -25,7 +25,6 @@ VALID_VALUE = re.compile('^[A-Za-z0-9-_.]*$')
 def validate(matchdict):
     """Validate the matchdict"""
     for key, value in matchdict.items():
-        print key, value
         if not VALID_KEY.match(key):
             raise AttributeError
         if not VALID_VALUE.match(value):
