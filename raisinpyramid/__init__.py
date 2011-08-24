@@ -19,7 +19,6 @@ from pyramid.authorization import ACLAuthorizationPolicy
 from pyramid.exceptions import Forbidden
 from raisin.page import PAGES
 from raisinpyramid import login
-from raisinpyramid import security
 from raisinpyramid.views import box_view
 from raisinpyramid.views import page_view
 from security import USERS
