@@ -28,20 +28,26 @@ from security import PROJECTS
 def register_page_and_boxes(config, page_key, page_value):
     """Register pages and boxes so that Pyramid knows what to serve"""
 
+    # Render page
     config.add_route(name='p1_' + page_key,
-                     path=page_value['path'],
-                     view=page_view,
-                     renderer=page_value['renderer'])
+                     path=page_value['path'])
+    config.add_view(page_view,
+                    route_name='p1_' + page_key,
+                    renderer=page_value['renderer'])
+
     # Remove the trailing slash, so that pages are also rendered without.
     config.add_route(name='p2_' + page_key,
-                     path=page_value['path'][:-1],
-                     view=page_view,
-                     renderer=page_value['renderer'])
+                     path=page_value['path'][:-1])
+    config.add_view(page_view,
+                    route_name='p2_' + page_key,
+                    renderer=page_value['renderer'])
+
     # Register page boxes
     config.add_route(name='p3_' + page_key + '_box',
-                     path=page_value['path'] + ':box_id_with_extension',
-                     view=box_view,
-                     renderer=page_value['renderer'])
+                     path=page_value['path'] + ':box_id_with_extension')
+    config.add_view(box_view,
+                    route_name='p3_' + page_key + '_box',
+                    renderer=page_value['renderer'])
 
 
 def main(global_config, **settings):
@@ -95,12 +101,14 @@ def main(global_config, **settings):
     config.begin()
     config.scan()
     config.add_route(name="login",
-                     path="login",
-                     view=login.login,
-                     view_renderer="raisinpyramid:templates/login.pt")
+                     path="login")
+    config.add_view(login.login,
+                    route_name="login",
+                    renderer="raisinpyramid:templates/login.pt")
     config.add_route(name="logout",
-                     path="logout",
-                     view=login.logout)
+                     path="logout")
+    config.add_view(login.logout,
+                    route_name="logout")
     # Register pages
     for page_key, page_value in PAGES.items():
         register_page_and_boxes(config, page_key, page_value)
