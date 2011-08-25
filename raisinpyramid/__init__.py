@@ -46,8 +46,7 @@ def register_page_and_boxes(config, page_key, page_value):
     config.add_route(name='p3_' + page_key + '_box',
                      path=page_value['path'] + ':box_id_with_extension')
     config.add_view(box_view,
-                    route_name='p3_' + page_key + '_box',
-                    renderer=page_value['renderer'])
+                    route_name='p3_' + page_key + '_box')
 
 
 def main(global_config, **settings):
