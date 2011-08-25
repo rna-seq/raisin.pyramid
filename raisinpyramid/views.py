@@ -8,7 +8,7 @@ from webob.exc import HTTPNotFound
 from pyramid.security import authenticated_userid
 from pyramid.static import static_view
 
-import pyramid.renderers
+from pyramid.renderers import render_to_response
 
 from raisin.restyler.page import Page
 from raisin.restyler.box import Box
@@ -32,29 +32,32 @@ def validate(matchdict):
 
 
 def box_view(request):
-    """View for boxes"""
-    validate(request.matchdict)
-    logged_in = authenticated_userid(request)
-    security.check_permission(request, logged_in)
-    context = Box(request)
+    """View for boxes using an internal template renderer.
 
+    Returns a response object.
+    """    
     file_extension = os.path.splitext(request.environ['PATH_INFO'])[1]
     if file_extension == '.ico':
         request.subpath = request.environ['PATH_INFO'].split('/')
         return STATIC_VIEW_OF_ICO(context, request)
-    elif file_extension == '.html':
+
+    validate(request.matchdict)
+    logged_in = authenticated_userid(request)
+    security.check_permission(request, logged_in)
+
+    context = Box(request)
+
+    if file_extension == '.html':
         template = 'raisin.page:templates/box.pt'
-        box_renderer = pyramid.renderers.get_renderer(template)
-        response = Response()
-        value = {'context': context,
-                 'request': request}
-        response.unicode_body = box_renderer(value, request.environ)
+        value = dict(context=context)
+        response = render_to_response(template, value)
     elif file_extension == '.csv':
         if context.body is None:
             return HTTPNotFound()
         else:
             response = Response()
             response.body = context.body
+            response.content_type = 'text/csv'
     else:
         raise AttributeError(file_extension)
 
@@ -62,7 +65,12 @@ def box_view(request):
 
 
 def page_view(request):
-    """View for pages"""
+    """View for pages using a template renderer defined outside of this
+    view callable.
+
+    Returns a dictionary whose itemw will be used as top-level names
+    in the template.
+    """
     validate(request.matchdict)
     logged_in = authenticated_userid(request)
     security.check_permission(request, logged_in)
