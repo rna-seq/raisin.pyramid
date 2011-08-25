@@ -48,7 +48,7 @@ def box_view(request):
         response = Response()
         value = {'context': context,
                  'request': request}
-        response.unicode_body = box_renderer(value, request)
+        response.unicode_body = box_renderer(value, request.environ)
     elif file_extension == '.csv':
         if context.body is None:
             return HTTPNotFound()
