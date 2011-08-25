@@ -38,9 +38,9 @@ def box_view(request):
     security.check_permission(request, logged_in)
     context = Box(request)
 
-    file_extension = os.path.splitext(request['PATH_INFO'])[1]
+    file_extension = os.path.splitext(request.environ['PATH_INFO'])[1]
     if file_extension == '.ico':
-        request.subpath = request['PATH_INFO'].split('/')
+        request.subpath = request.environ['PATH_INFO'].split('/')
         return STATIC_VIEW_OF_ICO(context, request)
     elif file_extension == '.html':
         template = 'raisin.page:templates/box.pt'
