@@ -19,8 +19,9 @@ from pyramid.authorization import ACLAuthorizationPolicy
 from pyramid.exceptions import Forbidden
 from raisin.page import PAGES
 from raisinpyramid import login
-from raisinpyramid.views import box_view
 from raisinpyramid.views import page_view
+from raisinpyramid.views import box_csv_view
+from raisinpyramid.views import box_html_view
 from security import USERS
 from security import PROJECTS
 
@@ -42,11 +43,17 @@ def register_page_and_boxes(config, page_key, page_value):
                     route_name='p2_' + page_key,
                     renderer=page_value['renderer'])
 
-    # Register page boxes
-    config.add_route(name='p3_' + page_key + '_box',
-                     path=page_value['path'] + ':box_id_with_extension')
-    config.add_view(box_view,
-                    route_name='p3_' + page_key + '_box')
+    # Register a page box rendered as html
+    config.add_route(name='p3_' + page_key + '_box_html',
+                     path=page_value['path'] + '{box_name}.html')
+    config.add_view(box_html_view,
+                    route_name='p3_' + page_key + '_box_html')
+
+    # Register a page box rendered as csv
+    config.add_route(name='p4_' + page_key + '_box_csv',
+                     path=page_value['path'] + '{box_name}.csv')
+    config.add_view(box_csv_view,
+                    route_name='p4_' + page_key + '_box_csv')
 
 
 def main(global_config, **settings):
