@@ -31,36 +31,36 @@ def validate(matchdict):
             raise AttributeError
 
 
-def box_view(request):
-    """View for boxes using an internal template renderer.
+def box_html_view(request):
+    """View for boxes rendered as html using an internal template renderer.
 
     Returns a response object.
     """    
-    file_extension = os.path.splitext(request.environ['PATH_INFO'])[1]
-    if file_extension == '.ico':
-        request.subpath = request.environ['PATH_INFO'].split('/')
-        return STATIC_VIEW_OF_ICO(context, request)
-
     validate(request.matchdict)
     logged_in = authenticated_userid(request)
     security.check_permission(request, logged_in)
-
     context = Box(request)
+    template = 'raisin.page:templates/box.pt'
+    value = dict(context=context)
+    response = render_to_response(template, value)
+    return response
 
-    if file_extension == '.html':
-        template = 'raisin.page:templates/box.pt'
-        value = dict(context=context)
-        response = render_to_response(template, value)
-    elif file_extension == '.csv':
-        if context.body is None:
-            return HTTPNotFound()
-        else:
-            response = Response()
-            response.body = context.body
-            response.content_type = 'text/csv'
+def box_csv_view(request):
+    """View for boxes rendered as csv.
+
+    Returns a response object.
+    """    
+    validate(request.matchdict)
+    logged_in = authenticated_userid(request)
+    security.check_permission(request, logged_in)
+    context = Box(request)
+    file_extension = os.path.splitext(request.environ['PATH_INFO'])[1]
+    if context.body is None:
+        return HTTPNotFound()
     else:
-        raise AttributeError(file_extension)
-
+        response = Response()
+        response.body = context.body
+        response.content_type = 'text/csv'
     return response
 
 
