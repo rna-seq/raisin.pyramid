@@ -1,7 +1,6 @@
 """Views for boxes and pages"""
 
 import re
-import os.path
 from webob import Response
 from webob.exc import HTTPNotFound
 
@@ -35,7 +34,7 @@ def box_html_view(request):
     """View for boxes rendered as html using an internal template renderer.
 
     Returns a response object.
-    """    
+    """
     validate(request.matchdict)
     logged_in = authenticated_userid(request)
     security.check_permission(request, logged_in)
@@ -45,16 +44,16 @@ def box_html_view(request):
     response = render_to_response(template, value)
     return response
 
+
 def box_csv_view(request):
     """View for boxes rendered as csv.
 
     Returns a response object.
-    """    
+    """
     validate(request.matchdict)
     logged_in = authenticated_userid(request)
     security.check_permission(request, logged_in)
     context = Box(request)
-    file_extension = os.path.splitext(request.environ['PATH_INFO'])[1]
     if context.body is None:
         return HTTPNotFound()
     else:
