@@ -1,21 +1,8 @@
 * text=auto !eol
-/CHANGES.txt -text
-/MANIFEST.in -text
-/README.txt -text
-raisinpyramid/__init__.py -text
-raisinpyramid/login.py -text
-raisinpyramid/security.py -text
 raisinpyramid/static/favicon.ico -text
 raisinpyramid/static/footerbg.png -text
 raisinpyramid/static/headerbg.png -text
-raisinpyramid/static/ie6.css -text
 raisinpyramid/static/middlebg.png -text
-raisinpyramid/static/pylons.css -text
 raisinpyramid/static/pyramid-small.png -text
 raisinpyramid/static/pyramid.png -text
 raisinpyramid/static/transparent.gif -text
-raisinpyramid/templates/login.pt -text
-raisinpyramid/views.py -text
-/setup.cfg -text
-/setup.py -text
-/version.txt -text
