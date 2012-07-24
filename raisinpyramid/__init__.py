@@ -26,34 +26,28 @@ from security import USERS
 from security import PROJECTS
 
 
-def register_page_and_boxes(config, page_key, page_value):
+def register_page_and_boxes(config, page_key, path, renderer):
     """Register pages and boxes so that Pyramid knows what to serve"""
 
     # Render page
-    config.add_route(name='p1_' + page_key,
-                     path=page_value['path'])
-    config.add_view(page_view,
-                    route_name='p1_' + page_key,
-                    renderer=page_value['renderer'])
+    name = 'p1_' + page_key
+    config.add_route(name=name, path=path)
+    config.add_view(page_view, route_name=name, renderer=renderer)
 
     # Remove the trailing slash, so that pages are also rendered without.
-    config.add_route(name='p2_' + page_key,
-                     path=page_value['path'][:-1])
-    config.add_view(page_view,
-                    route_name='p2_' + page_key,
-                    renderer=page_value['renderer'])
+    name = 'p2_' + page_key
+    config.add_route(name=name, path=path[:-1])
+    config.add_view(page_view, route_name=name, renderer=renderer)
 
     # Register a page box rendered as html
-    config.add_route(name='p3_' + page_key + '_box_html',
-                     path=page_value['path'] + '{box_name}.html')
-    config.add_view(box_html_view,
-                    route_name='p3_' + page_key + '_box_html')
+    name = 'p3_' + page_key + '_box_html'
+    config.add_route(name=name, path=path + '{box_name}.html')
+    config.add_view(box_html_view, route_name=name)
 
     # Register a page box rendered as csv
-    config.add_route(name='p4_' + page_key + '_box_csv',
-                     path=page_value['path'] + '{box_name}.csv')
-    config.add_view(box_csv_view,
-                    route_name='p4_' + page_key + '_box_csv')
+    name = name='p4_' + page_key + '_box_csv'
+    config.add_route(name=name, path=path + '{box_name}.csv')
+    config.add_view(box_csv_view, route_name=name)
 
 
 def main(global_config, **settings):
@@ -117,7 +111,14 @@ def main(global_config, **settings):
                     route_name="logout")
     # Register pages
     for page_key, page_value in PAGES.items():
-        register_page_and_boxes(config, page_key, page_value)
+        path = page_value['path']
+        renderer = page_value['renderer']
+        register_page_and_boxes(config, page_key, path, renderer)
+        if 'tabbed_views' in page_value:
+            # Tabs also need to be registered
+            path = path + 'tab/{tab_name}/'
+            page_key = 'tab_%s' % page_key
+            register_page_and_boxes(config, page_key, path, renderer)
 
     # Register folder containing static material
     config.add_static_view(name="static",
