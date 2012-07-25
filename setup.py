@@ -1,32 +1,39 @@
-import os
-
 from setuptools import setup, find_packages
+import sys, os
 
-here = os.path.abspath(os.path.dirname(__file__))
-README = open(os.path.join(here, 'README.txt')).read()
-CHANGES = open(os.path.join(here, 'CHANGES.txt')).read()
+version = '1.2'
+long_description = """The raisin.pyramid package is a part of Raisin, the web application
+used for publishing the summary statistics of Grape, a pipeline used for processing and
+analyzing RNA-Seq data."""
 
-requires = ['pyramid', 'WebError']
 
 setup(name='raisin.pyramid',
-      version='1.0',
-      description='raisin.pyramid',
-      long_description=README + '\n\n' +  CHANGES,
+      version=version,
+      description="A package used in the Raisin web application",
+      long_description=long_description,
       classifiers=[
-        "Programming Language :: Python",
-        "Framework :: Pylons",
-        "Topic :: Internet :: WWW/HTTP",
-        "Topic :: Internet :: WWW/HTTP :: WSGI :: Application",
-        ],
-      author='',
-      author_email='',
-      url='',
-      keywords='web pyramid pylons',
-      packages=find_packages(),
+          'Development Status :: 5 - Production/Stable',
+          'Programming Language :: Python',
+          'Intended Audience :: Developers',
+          'Operating System :: OS Independent',
+          'License :: OSI Approved :: GNU General Public License (GPL)',
+          'Natural Language :: English',
+          'Topic :: Software Development :: Libraries :: Python Modules',
+          'Operating System :: POSIX :: Linux'],
+      keywords='RNA-Seq pipeline ngs transcriptome bioinformatics ETL',
+      author='Maik Roder',
+      author_email='maikroeder@gmail.com',
+      url='http://big.crg.cat/services/grape',
+      license='GPL',
+      packages=find_packages(exclude=['ez_setup', 'examples', 'tests']),
       include_package_data=True,
       zip_safe=False,
-      install_requires=requires,
-      tests_require=requires,
+      install_requires=[
+          # -*- Extra requirements: -*-
+          'configobj',
+          'pyramid', 
+          'WebError',
+      ],
       test_suite="raisinpyramid",
       entry_points = """\
       [paste.app_factory]
