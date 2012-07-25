@@ -1,21 +1,12 @@
 = raisin.pyramid =
 
-This is a Pyramid server that serves the public pages of the RNASeq homepage.
-
-For more information about Pyramid, check out the official website:
-
-    http://pylonsproject.org/
-
-= Starting the server =
-
-For information on starting and stopping the server, have a look at the README.txt
-in raisin.buildout:
-
-svn://mroder@svn.crg.es/big/raisin/raisin.buildout/trunk
+This is a Pyramid server that is part of Raisin, the web application used for publishing
+the summary statistics of Grape, a pipeline used for processing and analyzing RNA-Seq
+data."""
 
 = About the server =
 
-The only purpose of this module is to configure the pages of the project so that the
+The purpose of this module is to configure the pages of the project so that the
 Pyramid application knows them and can serve them using the right models.
 
 The configuration of the pages and boxes is imported from raisin.box and raisin.page:
