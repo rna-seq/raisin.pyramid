@@ -31,7 +31,7 @@ setup(name='raisin.pyramid',
       install_requires=[
           # -*- Extra requirements: -*-
           'configobj',
-          'pyramid', 
+          'pyramid',
           'WebError',
       ],
       test_suite="raisinpyramid",
