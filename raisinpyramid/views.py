@@ -18,7 +18,7 @@ STATIC_VIEW_OF_ICO = static_view('raisin.page:templates/static/',
                                  cache_max_age=3600)
 
 VALID_KEY = re.compile('^[A-Za-z_]*$')
-VALID_VALUE = re.compile('^[A-Za-z0-9-_.]*$')
+VALID_VALUE = re.compile('^[A-Za-z0-9-_\.\+]*$')
 
 
 def validate(matchdict):
